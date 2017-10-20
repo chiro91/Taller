@@ -1,0 +1,98 @@
+﻿@model IEnumerable<TF_Base.Models.Orden>
+
+@{
+    ViewBag.Title = "Ordenes Abiertas";
+}
+<div class="container">
+    <h2 class="text-center">Ordenes abiertas</h2>
+    <form action="#" method="post">
+
+        <input type="text" placeholder="ingrese el dni" name="busqueda" required value="" />
+        @Html.ValidationMessage("errordni")
+        <input class="btn btn-outline-success" type="submit" name="btnBusqueda" value="Buscar" />
+        @if (IsPost)
+        {
+            <a class="btn btn-outline-danger" href="@Url.Action("Index", "Orden")">Limpiar busqueda</a><br /> 
+        }
+    </form>
+    @if (User.IsInRole("Empleado"))
+    {
+        <p>
+            <a class="btn btn-dark" href="@Url.Action("Orden", "Account")">Nueva orden de trabajo</a>
+
+        </p>}
+    <table class="table">
+        <thead class="text-center">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.codigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Propietario.nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Propietario.dni)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fechaIn)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.patente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.detalleFalla)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.marca)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Propietario.NombreApellido)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Propietario.dni)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaIn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaOut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.patente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.marca)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.detalleFalla)
+                    </td>
+
+
+                    <td>
+                        @if (User.IsInRole("Empleado"))
+                        {
+                            <a class="btn btn-outline-dark" href="@Url.Action("Create", "Reparacion")">Registrar reparaciones</a>
+                            <a class="btn btn-danger" href="@Url.Action("Edit", "Orden", new { id = item.idOrden })">Cerrar orden</a>  }
+           <a class="btn btn-primary" href=" @Url.Action("Details", "Orden", new { id = item.idOrden })">Detalles</a> 
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

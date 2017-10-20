@@ -1,0 +1,73 @@
+﻿@model TF_Base.Models.Orden
+
+@{
+    ViewBag.Title = "Nueva orden";
+}
+
+<h2 class="text-center">Nueva orden</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="text-center">
+        <legend>Orden</legend>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idPropietario, "Propietario")
+        </div> 
+
+        <div class="editor-field">
+            @Html.DropDownList("idPropietario", "--SELECCIONE CLIENTE--")<br />
+            @Html.ValidationMessageFor(model => model.idPropietario)
+        </div> 
+        
+             
+         <div class="editor-label">
+            @Html.LabelFor(model => model.marca)
+        </div>
+
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.marca)<br />
+            @Html.ValidationMessageFor(model => model.marca)
+        </div>
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.patente)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.patente)<br />
+            @Html.ValidationMessageFor(model => model.patente)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.detalleFalla)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.detalleFalla)<br />
+            @Html.ValidationMessageFor(model => model.detalleFalla)
+        </div>
+
+
+
+        <p>
+            <input class="btn btn-outline-success" type="submit" value="Generar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    <a class="btn btn-danger" href="@Url.Action("Orden","Account")">Volver</a>
+    
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+<div class="text-center">
+<h2>Bienvenido, @WebSecurity.CurrentUserName</h2>
+<a class="btn btn-outline-dark" href="@Url.Action("Create","Propietario")">Alta propietarios</a><br /> <br />
+<a class="btn btn-outline-dark" href="@Url.Action("Orden","Account")">Generar orden de trabajo</a><br /> <br />
+
+<a class="btn btn-outline-dark" href="@Url.Action("Index","Orden")">Cerrar orden</a>
+</div>

@@ -1,0 +1,84 @@
+﻿@model TF_Base.Models.Registro
+
+@{
+    ViewBag.Title = "Alta empleado";
+}
+
+<h2 class="text-center">Alta empleado</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="text-center">
+        <legend>Registro</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)<br />
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nombre)<br />
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Apellido)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Apellido)<br />
+            @Html.ValidationMessageFor(model => model.Apellido)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Dni)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Dni)<br />
+            @Html.ValidationMessageFor(model => model.Dni)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.mail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.mail)<br />
+            @Html.ValidationMessageFor(model => model.mail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)<br />
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PasswordConfirmation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PasswordConfirmation)<br />
+            @Html.ValidationMessageFor(model => model.PasswordConfirmation)
+        </div>
+
+        <p>
+            <input class="btn btn-outline-success" type="submit" value="Registrar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    <a class="btn btn-warning" href="@Url.Action("Index","Propietario")">Volver</a> 
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

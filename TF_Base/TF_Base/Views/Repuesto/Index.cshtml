@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TF_Base.Models.Repuesto>
+
+@{
+    ViewBag.Title = "Repuestos";
+}
+
+<div class="container">
+<h2 class="text-center">Repuestos</h2>
+
+<p>
+    <a class="btn btn-dark" href="@Url.Action("Create","Repuesto")">Agregar a la lista</a>
+   
+</p>
+<form action="#" method="post">
+    <input placeholder="ingrese el nombre del repuesto" type="text" name="busqueda" required value="" />
+    <input class="btn btn-outline-success" type="submit" name="btnBusqueda" value="Buscar" />
+     @if (IsPost)
+    {
+        <a class="btn btn-outline-danger" href="@Url.Action("Index", "Repuesto")">Limpiar busqueda</a><br /> 
+    }
+</form>
+<table class="table">
+    <thead class="text center">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.costo)
+        </th>
+        <th></th>
+    </tr></thead>
+<tbody class ="text-center">
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costo)
+        </td>
+        <td>
+            <a class="btn btn-outline-info" href="@Url.Action("Edit","Repuesto", new {  id=item.idRepuesto})">Modificar</a>
+             
+
+        </td>
+    </tr>
+}</tbody>
+
+</table>
+<a class="btn btn-danger" href="@Url.Action("VistaSupervisor","Account")">Volver</a></div>

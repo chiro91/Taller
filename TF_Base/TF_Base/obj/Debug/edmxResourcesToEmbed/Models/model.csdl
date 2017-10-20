@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TallerModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TallerEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Orden" EntityType="TallerModel.Orden" />
+    <EntitySet Name="Propietario" EntityType="TallerModel.Propietario" />
+    <EntitySet Name="Reparacion" EntityType="TallerModel.Reparacion" />
+    <EntitySet Name="Repuesto" EntityType="TallerModel.Repuesto" />
+    <EntitySet Name="Usuario" EntityType="TallerModel.Usuario" />
+    <AssociationSet Name="FK_Orden_Propietario" Association="TallerModel.FK_Orden_Propietario">
+      <End Role="Propietario" EntitySet="Propietario" />
+      <End Role="Orden" EntitySet="Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reparacion_Orden" Association="TallerModel.FK_Reparacion_Orden">
+      <End Role="Orden" EntitySet="Orden" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reparacion_Repuesto" Association="TallerModel.FK_Reparacion_Repuesto">
+      <End Role="Repuesto" EntitySet="Repuesto" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reparacion_Usuario" Association="TallerModel.FK_Reparacion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Orden">
+    <Key>
+      <PropertyRef Name="idOrden" />
+    </Key>
+    <Property Name="idOrden" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="idPropietario" Type="Int32" Nullable="false" />
+    <Property Name="fechaIn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fechaOut" Type="DateTime" Precision="3" />
+    <Property Name="patente" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="detalleFalla" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="total" Type="Double" />
+    <Property Name="codigo" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="marca" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Propietario" Relationship="TallerModel.FK_Orden_Propietario" FromRole="Orden" ToRole="Propietario" />
+    <NavigationProperty Name="Reparacion" Relationship="TallerModel.FK_Reparacion_Orden" FromRole="Orden" ToRole="Reparacion" />
+  </EntityType>
+  <EntityType Name="Propietario">
+    <Key>
+      <PropertyRef Name="idPropietario" />
+    </Key>
+    <Property Name="idPropietario" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="apellido" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="dni" Type="Int32" Nullable="false" />
+    <Property Name="mail" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="telefono" Type="Int32" Nullable="false" />
+    <Property Name="direccion" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Orden" Relationship="TallerModel.FK_Orden_Propietario" FromRole="Propietario" ToRole="Orden" />
+  </EntityType>
+  <EntityType Name="Reparacion">
+    <Key>
+      <PropertyRef Name="idReparacion" />
+    </Key>
+    <Property Name="idReparacion" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="idRepuesto" Type="Int32" Nullable="false" />
+    <Property Name="cantRepuesto" Type="Int32" Nullable="false" />
+    <Property Name="cantHoras" Type="Int32" Nullable="false" />
+    <Property Name="idOrden" Type="Int32" Nullable="false" />
+    <Property Name="idUsuario" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Orden" Relationship="TallerModel.FK_Reparacion_Orden" FromRole="Reparacion" ToRole="Orden" />
+    <NavigationProperty Name="Repuesto" Relationship="TallerModel.FK_Reparacion_Repuesto" FromRole="Reparacion" ToRole="Repuesto" />
+    <NavigationProperty Name="Usuario" Relationship="TallerModel.FK_Reparacion_Usuario" FromRole="Reparacion" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Repuesto">
+    <Key>
+      <PropertyRef Name="idRepuesto" />
+    </Key>
+    <Property Name="idRepuesto" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+    <Property Name="costo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Reparacion" Relationship="TallerModel.FK_Reparacion_Repuesto" FromRole="Repuesto" ToRole="Reparacion" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="apellido" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="mail" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="dni" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Reparacion" Relationship="TallerModel.FK_Reparacion_Usuario" FromRole="Usuario" ToRole="Reparacion" />
+  </EntityType>
+  <Association Name="FK_Orden_Propietario">
+    <End Role="Propietario" Type="TallerModel.Propietario" Multiplicity="1" />
+    <End Role="Orden" Type="TallerModel.Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propietario">
+        <PropertyRef Name="idPropietario" />
+      </Principal>
+      <Dependent Role="Orden">
+        <PropertyRef Name="idPropietario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reparacion_Orden">
+    <End Role="Orden" Type="TallerModel.Orden" Multiplicity="1" />
+    <End Role="Reparacion" Type="TallerModel.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orden">
+        <PropertyRef Name="idOrden" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="idOrden" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reparacion_Repuesto">
+    <End Role="Repuesto" Type="TallerModel.Repuesto" Multiplicity="1" />
+    <End Role="Reparacion" Type="TallerModel.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Repuesto">
+        <PropertyRef Name="idRepuesto" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="idRepuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reparacion_Usuario">
+    <End Role="Usuario" Type="TallerModel.Usuario" Multiplicity="1" />
+    <End Role="Reparacion" Type="TallerModel.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

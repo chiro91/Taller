@@ -1,0 +1,45 @@
+﻿@model TF_Base.Models.Repuesto
+
+@{
+    ViewBag.Title = "Alta repuesto";
+}
+
+<h2 class="text-center">Alta de repuestos</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="text-center">
+        <legend>Repuesto</legend>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.nombre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.nombre)<br />
+            @Html.ValidationMessageFor(model => model.nombre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.costo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.costo)<br />
+            @Html.ValidationMessageFor(model => model.costo)
+        </div>
+
+        <p>
+            <input class="btn btn-outline-success" type="submit" value="Guardar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    <a class="btn btn-outline-success" href="@Url.Action("Index","Repuesto")">Volver</a>
+    
+</div>
+
+
+

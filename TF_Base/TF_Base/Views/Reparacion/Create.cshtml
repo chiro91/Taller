@@ -1,0 +1,70 @@
+﻿@model TF_Base.Models.Reparacion
+
+@{
+    ViewBag.Title = "Agregar reparacion";
+}
+
+<h2 class="text-center">Registrar reparacion</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="text-center">
+        <legend>Reparacion</legend>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idRepuesto, "Repuesto")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idRepuesto", "REPUESTO UTILIZADO")<br />
+            @Html.ValidationMessageFor(model => model.idRepuesto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cantRepuesto)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cantRepuesto)<br />
+            @Html.ValidationMessageFor(model => model.cantRepuesto)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cantHoras)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cantHoras)<br />
+            @Html.ValidationMessageFor(model => model.cantHoras)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idOrden, "Orden")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idOrden", "SELECCIONE UN NUMERO DE ORDEN")<br />
+            @Html.ValidationMessageFor(model => model.idOrden)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.idUsuario, "Usuario")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("idUsuario", "SELECCIONE UN EMPLEADO")<br />
+            @Html.ValidationMessageFor(model => model.idUsuario)
+        </div>
+
+
+        <p>
+            <input class="btn btn-outline-success" type="submit" value="Agregar" />
+        </p>
+    </fieldset>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

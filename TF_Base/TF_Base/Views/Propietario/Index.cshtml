@@ -1,0 +1,80 @@
+﻿@model IEnumerable<TF_Base.Models.Propietario>
+
+@{
+    ViewBag.Title = "Propietarios";
+}
+<div class="container">
+<h2 class="text-center">Propietarios</h2>
+
+<form action="#" method="post">
+    
+    <input type="text" placeholder="ingrese el dni" name="busqueda" required value="" />
+    <input class="btn btn-outline-success" type="submit" name="btnBusqueda" value="Buscar" />
+    @if (IsPost)
+    {
+        <a class="btn btn-outline-danger" href="@Url.Action("Index", "Propietario")">Limpiar busqueda</a><br /> 
+    }
+</form>
+<table class="table">
+    <thead class="text-center">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.direccion)
+        </th>
+        <th></th>
+    </tr></thead>
+    <tbody class="text-center">
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            <a class="btn btn-outline-info" href="@Url.Action("Edit","Propietario", new { id=item.idPropietario })">Modificar</a>
+             
+
+        </td>
+    </tr>
+}</tbody>
+
+</table>
+</div>
+<a class="btn btn-outline-dark" href="@Url.Action("VistaSupervisor","Account")">Volver</a>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

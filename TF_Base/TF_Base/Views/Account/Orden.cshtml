@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Nueva orden";
+}
+
+<h2 class="text-center">Comprobar propietario</h2>
+
+<div class="text-center">   
+<form class="form-group" method="post" >
+    <label style="color:black">Ingrese el DNI</label>
+    <input class="btn btn-outline-dark" type="text" name="busqueda" required value="" /><br />
+
+    <small>*Si el propietario ya se encuentra en el sitema, lo redirigirá a generar la orden.</small><br />
+    <small>**Si el propietario no está en el sistema, lo llevará directo a dar el alta.</small>
+    <br />
+    @Html.ValidationMessage("errordni")
+
+    <input class="btn btn-outline-dark" type="submit" name="btnBusqueda" value="Buscar" />
+</form></div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

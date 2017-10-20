@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<header style="background-color:black">
+    <br />
+    <br />
+    <br />
+    <br />
+</header>
+<html>
+    
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title
+       
+    </title> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+   
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="background-image:url(https://blogrebellive.files.wordpress.com/2013/10/grey-background-for-site11.jpg)"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    @if(User.Identity.IsAuthenticated)
+    {
+    if (User.IsInRole("Supervisor"))
+    {
+        <a class="btn btn-outline-dark" href="@Url.Action("VistaSupervisor","Account")">Inicio</a> 
+    }
+    else
+    {
+        <a class="btn btn-outline-dark" href="@Url.Action("VistaEmpleado","Account")">Inicio</a>
+    }
+    <a style="float:right" class="btn btn-outline-dark" href="@Url.Action("Logout", "Account")">Logout</a>}
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

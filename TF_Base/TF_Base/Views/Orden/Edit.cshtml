@@ -1,0 +1,132 @@
+﻿@model TF_Base.Models.Orden
+
+@{
+    ViewBag.Title = "Resumen";
+}
+
+<h2 class="text-center">Confirme el cierre</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.idOrden)
+    @Html.HiddenFor(model => model.idPropietario)
+    @Html.HiddenFor(model => model.Reparacion)
+    @Html.HiddenFor(model => model.patente)
+    @Html.HiddenFor(model => model.marca)
+    @Html.HiddenFor(model => model.fechaIn)
+    @Html.HiddenFor(model => model.codigo)
+    @Html.HiddenFor(model => model.detalleFalla)
+    @Html.HiddenFor(model => model.Propietario)
+    <fieldset class="text-center">
+        <legend>Orden</legend>
+
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Propietario.nombre)
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Propietario.nombre)
+        </div>
+        <br />
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.fechaIn)
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.fechaIn)
+        </div>
+        <br />
+
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.patente)
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.patente)
+        </div>
+        <br />
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.detalleFalla)
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.detalleFalla)
+        </div>
+        <br />
+
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.codigo)
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.codigo)
+        </div>
+        <br />
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.marca)
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.marca)
+        </div>
+        <br />
+    </fieldset>
+    <table class="table">
+        <thead class="text-center">
+        <tr>
+
+            <th>
+                <label>Repuesto</label>
+            </th>
+            <th>
+                <label>Cantidad usada</label>
+            </th>
+            <th>
+                <label>Horas de trabajo</label>
+            </th>
+
+            <th>
+                <label>Empleado</label>
+            </th>
+            <th>
+                <label>Subtotal</label>
+            </th>
+            <th></th>
+        </tr></thead>
+<tbody class ="text center">
+        @foreach (var item in Model.Reparacion)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Repuesto.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantRepuesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantHoras)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.NombreApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.subtotal)
+                </td>
+            </tr>
+        }</tbody>
+    </table>
+    <p>Total mano de obra= @Session["manoDeObra"]</p>
+    <p>Total = @Session["total"] pesos.</p>
+    <input class="btn btn-danger" type="submit" name="confirmar" value="Confirmar cierre" />
+}
+
+
+

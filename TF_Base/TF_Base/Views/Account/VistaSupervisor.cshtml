@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<h2 class="text-center">Bienvenido, Admin!</h2>
+<div class="text-center">
+    <a class="btn btn-outline-danger" href="@Url.Action("Register", "Account")">Alta empleado</a>
+    <br />  <br />
+    <a class="btn btn-outline-danger" href="@Url.Action("Index", "Repuesto")">Gestionar repuestos</a>
+    <br /> <br />
+    <a class="btn btn-outline-danger" href="@Url.Action("OrdenesCerradas", "Orden")">Ver ordenes cerradas</a>
+    <br /> <br />
+    <a class="btn btn-outline-danger" href="@Url.Action("Index", "Orden")">Ordenes abiertas</a><br /> <br />
+    <a class="btn btn-outline-danger" href="@Url.Action("Index", "Propietario")">Gestionar Propietarios</a>
+</div>

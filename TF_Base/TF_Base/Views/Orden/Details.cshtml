@@ -1,0 +1,143 @@
+﻿@model TF_Base.Models.Orden
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container">
+    <h2 class="text-center">Resumen</h2>
+
+    <fieldset>
+        <legend>Orden #@Model.codigo</legend>
+
+        @Html.HiddenFor(model => model.idOrden)
+        <div class="display-label">
+            <h3>
+                @Html.DisplayNameFor(model => model.Propietario.nombre)</h3>
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Propietario.nombre)
+        </div>
+        <br />
+        <div class="display-label">
+            <h3>
+                @Html.DisplayNameFor(model => model.fechaIn)</h3>
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.fechaIn)
+        </div>
+        <br />
+         <div class="display-label">
+            <h3>
+                @Html.DisplayNameFor(model => model.fechaOut)</h3>
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.fechaOut)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <h3>
+                @Html.DisplayNameFor(model => model.patente)</h3>
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.patente)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <h3>
+                @Html.DisplayNameFor(model => model.detalleFalla)</h3>
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.detalleFalla)
+        </div>
+        <br />
+
+
+        <div class="display-label">
+            <h3>
+                @Html.DisplayNameFor(model => model.codigo)</h3>
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.codigo)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <h3>
+                @Html.DisplayNameFor(model => model.marca)</h3>
+        </div>
+        <br />
+        <div class="display-field">
+            @Html.DisplayFor(model => model.marca)
+        </div>
+        <br />
+    </fieldset>
+    <table class="table">
+        <tr>
+
+            <th>
+                <label>Repuesto</label>
+            </th>
+            <th>
+                <label>Cantidad usada</label>
+            </th>
+            <th>
+                <label>Horas de trabajo</label>
+            </th>
+
+            <th>
+                <label>Empleado</label>
+            </th>
+            <th>
+                <label>Subtotal</label>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Reparacion)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Repuesto.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantRepuesto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantHoras)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.NombreApellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.subtotal)
+                </td>
+                @if (User.IsInRole("Supervisor") && Model.fechaOut == null)
+                {
+                    <td><a class="btn btn-warning" href="@Url.Action("Edit", "Reparacion")">Modificar</a></td>}
+            </tr>}
+    </table>
+    <p>Total mano de obra= @Session["manoDeObra"]</p>
+    <p>Total = @Session["total"] pesos.</p>
+    <p>
+        @if (Model.fechaOut == null)
+        {
+            if (User.IsInRole("Empleado"))
+            {
+            <a class="btn btn-outline-success" href="@Url.Action("Edit", "Orden", new { id = Model.idOrden })">Cerrar orden</a>
+            }
+            <a class="btn btn-danger" href="@Url.Action("Index", "Orden")">content</a> }
+    @if (Model.fechaOut != null)
+    {
+        <a class="btn btn-danger" href="@Url.Action("OrdenesCerradas", "Orden")">Volver</a> 
+    }
+    </p>
+</div>

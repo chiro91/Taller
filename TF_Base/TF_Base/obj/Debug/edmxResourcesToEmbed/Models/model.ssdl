@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TallerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TallerModelStoreContainer">
+    <EntitySet Name="Orden" EntityType="TallerModel.Store.Orden" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Propietario" EntityType="TallerModel.Store.Propietario" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reparacion" EntityType="TallerModel.Store.Reparacion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Repuesto" EntityType="TallerModel.Store.Repuesto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Usuario" EntityType="TallerModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Orden_Propietario" Association="TallerModel.Store.FK_Orden_Propietario">
+      <End Role="Propietario" EntitySet="Propietario" />
+      <End Role="Orden" EntitySet="Orden" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reparacion_Orden" Association="TallerModel.Store.FK_Reparacion_Orden">
+      <End Role="Orden" EntitySet="Orden" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reparacion_Repuesto" Association="TallerModel.Store.FK_Reparacion_Repuesto">
+      <End Role="Repuesto" EntitySet="Repuesto" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reparacion_Usuario" Association="TallerModel.Store.FK_Reparacion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Reparacion" EntitySet="Reparacion" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Orden">
+    <Key>
+      <PropertyRef Name="idOrden" />
+    </Key>
+    <Property Name="idOrden" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="idPropietario" Type="int" Nullable="false" />
+    <Property Name="fechaIn" Type="datetime" Nullable="false" />
+    <Property Name="fechaOut" Type="datetime" />
+    <Property Name="patente" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="detalleFalla" Type="text" Nullable="false" />
+    <Property Name="total" Type="float" />
+    <Property Name="codigo" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="marca" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Propietario">
+    <Key>
+      <PropertyRef Name="idPropietario" />
+    </Key>
+    <Property Name="idPropietario" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="apellido" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="dni" Type="int" Nullable="false" />
+    <Property Name="mail" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="telefono" Type="int" Nullable="false" />
+    <Property Name="direccion" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reparacion">
+    <Key>
+      <PropertyRef Name="idReparacion" />
+    </Key>
+    <Property Name="idReparacion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="idRepuesto" Type="int" Nullable="false" />
+    <Property Name="cantRepuesto" Type="int" Nullable="false" />
+    <Property Name="cantHoras" Type="int" Nullable="false" />
+    <Property Name="idOrden" Type="int" Nullable="false" />
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="subtotal" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Repuesto">
+    <Key>
+      <PropertyRef Name="idRepuesto" />
+    </Key>
+    <Property Name="idRepuesto" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="costo" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="nombre" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="apellido" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="mail" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="dni" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Orden_Propietario">
+    <End Role="Propietario" Type="TallerModel.Store.Propietario" Multiplicity="1" />
+    <End Role="Orden" Type="TallerModel.Store.Orden" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propietario">
+        <PropertyRef Name="idPropietario" />
+      </Principal>
+      <Dependent Role="Orden">
+        <PropertyRef Name="idPropietario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reparacion_Orden">
+    <End Role="Orden" Type="TallerModel.Store.Orden" Multiplicity="1" />
+    <End Role="Reparacion" Type="TallerModel.Store.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orden">
+        <PropertyRef Name="idOrden" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="idOrden" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reparacion_Repuesto">
+    <End Role="Repuesto" Type="TallerModel.Store.Repuesto" Multiplicity="1" />
+    <End Role="Reparacion" Type="TallerModel.Store.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Repuesto">
+        <PropertyRef Name="idRepuesto" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="idRepuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reparacion_Usuario">
+    <End Role="Usuario" Type="TallerModel.Store.Usuario" Multiplicity="1" />
+    <End Role="Reparacion" Type="TallerModel.Store.Reparacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Reparacion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

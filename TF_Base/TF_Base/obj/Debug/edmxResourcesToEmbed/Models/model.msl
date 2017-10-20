@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TallerModelStoreContainer" CdmEntityContainer="TallerEntities">
+    <EntitySetMapping Name="Orden">
+      <EntityTypeMapping TypeName="TallerModel.Orden">
+        <MappingFragment StoreEntitySet="Orden">
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="idPropietario" ColumnName="idPropietario" />
+          <ScalarProperty Name="fechaIn" ColumnName="fechaIn" />
+          <ScalarProperty Name="fechaOut" ColumnName="fechaOut" />
+          <ScalarProperty Name="patente" ColumnName="patente" />
+          <ScalarProperty Name="detalleFalla" ColumnName="detalleFalla" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Propietario">
+      <EntityTypeMapping TypeName="TallerModel.Propietario">
+        <MappingFragment StoreEntitySet="Propietario">
+          <ScalarProperty Name="idPropietario" ColumnName="idPropietario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="dni" ColumnName="dni" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reparacion">
+      <EntityTypeMapping TypeName="TallerModel.Reparacion">
+        <MappingFragment StoreEntitySet="Reparacion">
+          <ScalarProperty Name="idReparacion" ColumnName="idReparacion" />
+          <ScalarProperty Name="idRepuesto" ColumnName="idRepuesto" />
+          <ScalarProperty Name="cantRepuesto" ColumnName="cantRepuesto" />
+          <ScalarProperty Name="cantHoras" ColumnName="cantHoras" />
+          <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repuesto">
+      <EntityTypeMapping TypeName="TallerModel.Repuesto">
+        <MappingFragment StoreEntitySet="Repuesto">
+          <ScalarProperty Name="idRepuesto" ColumnName="idRepuesto" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="costo" ColumnName="costo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="TallerModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="dni" ColumnName="dni" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

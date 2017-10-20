@@ -1,0 +1,105 @@
+﻿@model IEnumerable<TF_Base.Models.Orden>
+
+@{
+    ViewBag.Title = "Ordenes Cerradas";
+}
+
+<h2 class="text-center">Ordenes Cerradas</h2>
+<form action="#" method="post">
+
+    <input type="text" placeholder="ingrese el dni" name="busqueda" required value="" />
+    @Html.ValidationMessage("errordni")
+    <input class="btn btn-outline-success" type="submit" name="btnBusqueda" value="Buscar" />
+    @if (IsPost)
+    {
+        <a class="btn btn-outline-danger" href="@Url.Action("OrdenesCerradas", "Orden")">Limpiar busqueda</a><br /> 
+    }
+</form>
+
+<table class="table">
+    <thead class="text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Propietario.dni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Propietario.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaIn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaOut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.patente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.marca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detalleFalla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total)
+            </th>
+
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Propietario.dni)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Propietario.NombreApellido)
+                </td>
+                
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaOut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.marca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.detalleFalla)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+
+                
+                <td>
+                    <a class="btn btn-outline-info" href="@Url.Action("Details", "Orden", new { id = item.idOrden })">Ver detalle</a>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
